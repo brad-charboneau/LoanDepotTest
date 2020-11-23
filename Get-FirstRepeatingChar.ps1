@@ -15,13 +15,18 @@
 └─────────────────────────────────────────────────────────────────────────────────────────────┘ 
  
 .PARAMETER inputString 
-String To Look For First Repeated Character In
+        String To Look For First Repeated Character In
+
+.OUTPUTS
+        System.String of first repeated character
+        if "asdflkoijader" is passed to Get-FirstRepeatingChar Function, then a is returned
+        if "asdflkoijider" is passed to Get-FirstRepeatingChar Function, then i is returned
 
 .EXAMPLE 
-Get-FirstRepeatingChar -inputString 'Hello'
+        Get-FirstRepeatingChar -inputString 'asdflkoijader'
 
 .EXAMPLE
-Get-FirstRepeatingChar 'Hello'
+        Get-FirstRepeatingChar 'asdflkoijader'
 
 #> 
 
