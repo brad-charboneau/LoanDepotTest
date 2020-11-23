@@ -17,17 +17,31 @@
 .PARAMETER inputString 
         String To Look For First Repeated Character In
 
+.PARAMETER CaseSensitive
+        Allows user to specify if Search shoul Consider Canse Sensitivity
+        Default: False
+
 .OUTPUTS
         System.String of first repeated character
-        if "asdflkoijader" is passed to Get-FirstRepeatingChar Function, then a is returned
-        if "asdflkoijider" is passed to Get-FirstRepeatingChar Function, then i is returned
+        if CaseSensitive Switch is NOT used:
+            if "asdflkoijABCDader" is passed to Get-FirstRepeatingChar Function, then A is returned as lowercase a is the same as Capital A because case is ignored
+            if "asdflkoijABCDider" is passed to Get-FirstRepeatingChar Function, then A is returned as lowercase a is the same as Capital A because case is ignored
+        if CaseSensitive Switch is used:
+            if "asdflkoijABCDader" is passed to Get-FirstRepeatingChar Function, then a is returned because case must also match
+            if "asdflkoijABCDider" is passed to Get-FirstRepeatingChar Function, then i is returned because case must also match
 
 .EXAMPLE 
-        Get-FirstRepeatingChar -inputString 'asdflkoijader'
-
+        Get-FirstRepeatingChar -inputString 'asdflkoijABCDader'
+            First Repeated Character found in "asdflkoijABCDader" was: "A"
 .EXAMPLE
         Get-FirstRepeatingChar 'asdflkoijader'
-
+            First Repeated Character found in "asdflkoijABCDider" was: "A"
+.EXAMPLE 
+        Get-FirstRepeatingChar -inputString 'asdflkoijABCDader' -CaseSensitive
+            First Repeated Character found in "asdflkoijABCDader" was: "a"
+.EXAMPLE
+        Get-FirstRepeatingChar 'asdflkoijABCDider' -CaseSensitive
+            First Repeated Character found in "asdflkoijABCDider" was: "i"
 #> 
 
 function Get-FirstRepeatingChar() {
@@ -36,22 +50,36 @@ function Get-FirstRepeatingChar() {
     Param 
     ( 
         [Parameter(Mandatory = $true)] 
-        [String]$inputString
+        [String]$inputString,
+
+        [Parameter()]
+        [Switch]$CaseSensitive = $false
     )
-    #convert String to array of Characters
+    # Convert String to array of Characters
     $charArray = $inputString.ToCharArray()
 
-    #Create Object to pass first occurrence characters into list for compare
+    # Create Object to pass first occurrence characters into list for compare
     $charObject = [System.Collections.ArrayList]@()
-    
-    #loop through array of characters
+    # Loop through array of characters
     foreach ($char in $charArray) {
-        if ($char -notin $charObject) {
-            # Insert Character into Object if it is not already there
-            $charObject.Add($char) | Out-Null
+        if ($CaseSensitive) {
+            if ($char -cnotin $charObject) {
+                # Insert Character into Object if it is not already there
+                $charObject.Add($char) | Out-Null
+            } else {
+                # If Character is found in the Object already, Stop and return Character to Console Output
+                return "First Repeated Character found in `"$inputString`" was: `"$char`""
+            }
         } else {
-            # If Character is found in the Object already, Stop and return Current Character to Console Output
-            return $char
+            if ($char -notin $charObject) {
+                # Insert Character into Object if it is not already there
+                $charObject.Add($char) | Out-Null
+            } else {
+                # If Character is found in the Object already, Stop and return Notification to Console Output
+                return "First Repeated Character found in `"$inputString`" was: `"$char`""
+            }
         }
     }
+    return "No Repeating Characters Found"
+    
 }
