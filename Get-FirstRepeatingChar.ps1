@@ -1,4 +1,29 @@
-# Returns the first charater that is repeated in a string of arbitrary legnth
+<# 
+.SYNOPSIS 
+ Returns the first charater that is repeated in a string of arbitrary legnth
+ 
+.DESCRIPTION 
+ Returns the first charater that is repeated in a string of arbitrary legnth
+ 
+.NOTES 
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐ 
+│ ORIGIN STORY                                                                                │ 
+├─────────────────────────────────────────────────────────────────────────────────────────────┤ 
+│   DATE        : 2020.11.23 
+│   AUTHOR      : Bradford Charboneau
+│   DESCRIPTION : LoanDepot Powershell Test
+└─────────────────────────────────────────────────────────────────────────────────────────────┘ 
+ 
+.PARAMETER inputString 
+String To Look For First Repeated Character In
+
+.EXAMPLE 
+Get-FirstRepeatingChar -inputString 'Hello'
+
+.EXAMPLE
+Get-FirstRepeatingChar 'Hello'
+
+#> 
 
 function Get-FirstRepeatingChar() {
     [OutputType([String])]     
