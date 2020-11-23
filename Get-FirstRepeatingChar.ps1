@@ -18,7 +18,7 @@
         String To Look For First Repeated Character In
 
 .PARAMETER CaseSensitive
-        Allows user to specify if Search shoul Consider Canse Sensitivity
+        Allows user to specify if Search should Consider Case Sensitivity
         Default: False
 
 .OUTPUTS
