@@ -24,6 +24,13 @@
         Get-FirstRepeatingChar -inputString 'asdflkoijABCDader'
             Output: First Repeated Character found in "asdflkoijABCDader" was: "a" 
             Reason: Compairson is case sensitive, so it skips the "A" and returns the "a" that follows it.
+            
+.EXAMPLE 
+        'asdflkoijABCDader','zxcvbnb'|Get-FirstRepeatingChar 
+            Output: 
+                First Repeated Character found in "asdflkoijABCDader" was: "a" 
+                First Repeated Character found in "zxcvbnb" was: "b" 
+            Reason: Compairson is case sensitive, so it skips the "A" and returns the "a" that follows it.
 #> 
 
 # Returns the first charater that is repeated in a string of arbitrary legnth
