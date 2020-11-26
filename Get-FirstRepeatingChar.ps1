@@ -29,8 +29,7 @@
         'asdflkoijABCDader','zxcvbnb'|Get-FirstRepeatingChar 
             Output: 
                 First Repeated Character found in "asdflkoijABCDader" was: "a" 
-                First Repeated Character found in "zxcvbnb" was: "b" 
-            Reason: Compairson is case sensitive, so it skips the "A" and returns the "a" that follows it.
+                First Repeated Character found in "zxcvbnb" was: "b"
 #> 
 
 # Returns the first charater that is repeated in a string of arbitrary legnth
