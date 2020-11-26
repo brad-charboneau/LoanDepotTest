@@ -46,6 +46,10 @@ function Get-FirstRepeatingChar() {
         $i = 0
     }
     PROCESS {
+        # if multiple strings were passed via pipeline, Clear Hashtable on subsequent runs
+        If ($charHashtable.Count -ne 0) {
+            $charHashtable.Clear()
+        }
         # Convert String to array of Characters
         $charArray = $inputString.ToCharArray()
         foreach ($char in $charArray) {
