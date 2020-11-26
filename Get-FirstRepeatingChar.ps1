@@ -3,7 +3,7 @@
  Returns the first charater that is repeated in a string of arbitrary legnth
  
 .DESCRIPTION 
- LoanDepot DevOps Powershell Test:
+ LoanDepot DevOps Interview Powershell Test:
  Create a powershell function or cmdlet that takes an arbitrarily long string parameter 
  $foo (e.g. 'abcdedcba') and returns the first recurring character in that Input string. 
  In 'abcdedcba', 'd' would be the first recurring character, so the cmdlet/function should 
