@@ -17,10 +17,6 @@
 .PARAMETER inputString 
         String To Look For First Repeated Character In
 
-.PARAMETER CaseSensitive
-        Allows user to specify if Search should Consider Case Sensitivity
-        Default: False
-
 .OUTPUTS
         System.String of first repeated character
         if CaseSensitive Switch is NOT used:
@@ -52,10 +48,7 @@ function Get-FirstRepeatingChar() {
     Param 
     ( 
         [Parameter(Mandatory = $true)] 
-        [String]$inputString,
-
-        [Parameter()]
-        [Switch]$CaseSensitive = $false
+        [String]$inputString
     )
     # Convert String to array of Characters
     $charArray = $inputString.ToCharArray()
@@ -65,12 +58,8 @@ function Get-FirstRepeatingChar() {
     # Loop through array of characters
     $i = 0
     foreach ($char in $charArray) {
-        Try { 
-            if($CaseSensitive) {
-                $charHashtable.Add($char, $i++) | Out-Null
-            } else {
-                $charHashtable.Add($char.ToLower(), $i++) | Out-Null
-            }
+        Try {
+            $charHashtable.Add($char, $i++) | Out-Null
         } Catch [ArgumentException] {
             # If Character is found in the Hashtable already, Stop and return Character to Console Output
             return "First Repeated Character found in `"$inputString`" was: `"$char`""
