@@ -44,6 +44,8 @@
             First Repeated Character found in "asdflkoijABCDider" was: "i"
 #> 
 
+# Returns the first charater that is repeated in a string of arbitrary legnth
+
 function Get-FirstRepeatingChar() {
     [OutputType([String])]     
     [CmdletBinding()] 
@@ -58,28 +60,21 @@ function Get-FirstRepeatingChar() {
     # Convert String to array of Characters
     $charArray = $inputString.ToCharArray()
 
-    # Create Object to pass first occurrence characters into list for compare
-    $charObject = [System.Collections.ArrayList]@()
+    # Create Hashtable to pass first occurrence characters into list for compare
+    $charHashtable = @{}
     # Loop through array of characters
+    $i = 0
     foreach ($char in $charArray) {
-        if ($CaseSensitive) {
-            if ($char -cnotin $charObject) {
-                # Insert Character into Object if it is not already there
-                $charObject.Add($char) | Out-Null
+        Try { 
+            if($CaseSensitive) {
+                $charHashtable.Add($char, $i++) | Out-Null
             } else {
-                # If Character is found in the Object already, Stop and return Character to Console Output
-                return "First Repeated Character found in `"$inputString`" was: `"$char`""
+                $charHashtable.Add($char.ToLower(), $i++) | Out-Null
             }
-        } else {
-            if ($char -notin $charObject) {
-                # Insert Character into Object if it is not already there
-                $charObject.Add($char) | Out-Null
-            } else {
-                # If Character is found in the Object already, Stop and return Notification to Console Output
-                return "First Repeated Character found in `"$inputString`" was: `"$char`""
-            }
+        } Catch [ArgumentException] {
+            # If Character is found in the Hashtable already, Stop and return Character to Console Output
+            return "First Repeated Character found in `"$inputString`" was: `"$char`""
         }
     }
-    return "No Repeating Characters Found"
-    
+    return "No Repeating Characters Found" 
 }
