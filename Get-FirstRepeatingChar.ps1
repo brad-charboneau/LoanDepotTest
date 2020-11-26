@@ -20,7 +20,6 @@
  
 .PARAMETER inputString 
         String To Look For First Repeated Character In
-
 .EXAMPLE 
         Get-FirstRepeatingChar -inputString 'asdflkoijABCDader'
             Output: First Repeated Character found in "asdflkoijABCDader" was: "a" 
@@ -37,21 +36,23 @@ function Get-FirstRepeatingChar() {
         [Parameter(Mandatory = $true)] 
         [String]$inputString
     )
-    # Convert String to array of Characters
-    $charArray = $inputString.ToCharArray()
-
-    # Create Hashtable to pass first occurrence characters into list for compare
-    $charHashtable = @{}
-    # Loop through array of characters
-    $i = 0
-    foreach ($char in $charArray) {
-        Try {
-            $charHashtable.Add($char, $i++) | Out-Null
-        } 
-        Catch [ArgumentException] {
-            # If Character is found in the Hashtable already, Stop and return Character to Console Output
-            return "First Repeated Character found in `"$inputString`" was: `"$char`""
-        }
+    BEGIN {
+        # Initialize Variables
+        # Convert String to array of Characters
+        $charArray = $inputString.ToCharArray()
+        $charHashtable = @{}
+        $i = 0
     }
-    return "No Repeating Characters Found" 
+    PROCESS {
+        foreach ($char in $charArray) {
+            Try {
+                $charHashtable.Add($char, $i++) | Out-Null
+            } 
+            Catch [ArgumentException] {
+                # If Character is found in the Hashtable already, Stop and return Character to Console Output
+                return "First Repeated Character found in `"$inputString`" was: `"$char`""
+            }
+        }
+        return "No Repeating Characters Found" 
+    }
 }
