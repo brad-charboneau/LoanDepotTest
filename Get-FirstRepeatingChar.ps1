@@ -33,17 +33,21 @@ function Get-FirstRepeatingChar() {
     [CmdletBinding()] 
     Param 
     ( 
-        [Parameter(Mandatory = $true)] 
+        [Parameter(
+            Position = 0,
+            Mandatory = $true,
+            ValueFromPipeline = $true
+        )] 
         [String]$inputString
     )
     BEGIN {
         # Initialize Variables
-        # Convert String to array of Characters
-        $charArray = $inputString.ToCharArray()
         $charHashtable = @{}
         $i = 0
     }
     PROCESS {
+        # Convert String to array of Characters
+        $charArray = $inputString.ToCharArray()
         foreach ($char in $charArray) {
             Try {
                 $charHashtable.Add($char, $i++) | Out-Null
