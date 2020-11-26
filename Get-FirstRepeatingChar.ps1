@@ -57,6 +57,6 @@ function Get-FirstRepeatingChar() {
                 return "First Repeated Character found in `"$inputString`" was: `"$char`""
             }
         }
-        return "No Repeating Characters Found" 
+        return "No Repeating Characters Found in `"$inputString`"" 
     }
 }
