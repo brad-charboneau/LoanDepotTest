@@ -15,7 +15,7 @@
 ├─────────────────────────────────────────────────────────────────────────────────────────────┤ 
 │   DATE        : 2020.11.23 
 │   AUTHOR      : Bradford Charboneau
-│   DESCRIPTION : LoanDepot DevOps Powershell Test
+│   DESCRIPTION : LoanDepot Powershell Test
 └─────────────────────────────────────────────────────────────────────────────────────────────┘ 
  
 .PARAMETER inputString 
@@ -24,12 +24,6 @@
         Get-FirstRepeatingChar -inputString 'asdflkoijABCDader'
             Output: First Repeated Character found in "asdflkoijABCDader" was: "a" 
             Reason: Compairson is case sensitive, so it skips the "A" and returns the "a" that follows it.
-            
-.EXAMPLE 
-        'asdflkoijABCDader','zxcvbnb'|Get-FirstRepeatingChar 
-            Output: 
-                First Repeated Character found in "asdflkoijABCDader" was: "a" 
-                First Repeated Character found in "zxcvbnb" was: "b"
 #> 
 
 # Returns the first charater that is repeated in a string of arbitrary legnth
@@ -46,16 +40,10 @@ function Get-FirstRepeatingChar() {
         )] 
         [String]$inputString
     )
-    BEGIN {
+    process {
         # Initialize Variables
         $charHashtable = @{}
         $i = 0
-    }
-    PROCESS {
-        # if multiple strings were passed via pipeline, Clear Hashtable on subsequent runs
-        If ($charHashtable.Count -ne 0) {
-            $charHashtable.Clear()
-        }
         # Convert String to array of Characters
         $charArray = $inputString.ToCharArray()
         foreach ($char in $charArray) {
