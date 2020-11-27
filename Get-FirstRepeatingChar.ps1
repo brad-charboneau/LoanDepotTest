@@ -15,7 +15,7 @@
 ├─────────────────────────────────────────────────────────────────────────────────────────────┤ 
 │   DATE        : 2020.11.23 
 │   AUTHOR      : Bradford Charboneau
-│   DESCRIPTION : LoanDepot Powershell Test
+│   DESCRIPTION : LoanDepot DevOps Powershell Test
 └─────────────────────────────────────────────────────────────────────────────────────────────┘ 
  
 .PARAMETER inputString 
